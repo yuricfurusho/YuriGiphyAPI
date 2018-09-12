@@ -9,10 +9,10 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.yuricfurusho.yurigiphyapi.R
 import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment.OnListFragmentInteractionListener
-import com.yuricfurusho.yurigiphyapi.model.GifObject
+import com.yuricfurusho.yurigiphyapi.model.Data
 
 class GIFRecyclerViewAdapter(
-        private val mGifObjectList: List<GifObject>,
+        private val mGifObjectList: List<Data>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<GIFRecyclerViewAdapter.ViewHolder>() {
 
@@ -20,8 +20,7 @@ class GIFRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as GifObject
-            mListener?.onAddToFavorite(item)
+            mListener?.onAddToFavorite(v)
         }
     }
 
@@ -31,18 +30,11 @@ class GIFRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mGifObjectList[position]
+        val item: Data = mGifObjectList[position]
 
-        if (position % 2 ==0) {
-            Glide.with(holder.itemView).load("http://lorempixel.com/400/200/food/").into(holder.imageViewGif)
-        } else {
-            Glide.with(holder.itemView)
-                    .load("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif")
-                    .into(holder.imageViewGif)
-        }
+        Glide.with(holder.itemView).load(item.images.fixedHeightDownsampled.url).into(holder.imageViewGif)
 
         with(holder.imageViewGif) {
-            tag = item
             setOnClickListener(mOnClickListener)
         }
     }
