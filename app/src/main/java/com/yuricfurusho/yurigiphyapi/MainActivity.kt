@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter
-import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment
+import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
+import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), TrendingFragment.OnListFragmentInteractionListener {
-    override fun onAddToFavorite(item: Any?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
+    override fun onAddToFavorite(itemID: String) {
+
+        val favoritesFrag: FavoritesFragment? = giphyPagerAdapter?.getItem(1) as FavoritesFragment?
+
+        favoritesFrag?.updateFavoriteList(itemID)
+
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null

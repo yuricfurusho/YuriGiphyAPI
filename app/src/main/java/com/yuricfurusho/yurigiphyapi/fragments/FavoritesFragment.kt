@@ -3,18 +3,15 @@ package com.yuricfurusho.yurigiphyapi.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yuricfurusho.yurigiphyapi.GiphyService
 import com.yuricfurusho.yurigiphyapi.R
-import com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter
 import com.yuricfurusho.yurigiphyapi.model.Data
 import com.yuricfurusho.yurigiphyapi.model.TrendingResponse
-import kotlinx.android.synthetic.main.fragment_gif_list.*
+import kotlinx.android.synthetic.main.fragment_favorite_gif_list.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
@@ -24,10 +21,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-class TrendingFragment : Fragment() {
+class FavoritesFragment : Fragment() {
     private var columnCount = 1
-    var gifList: MutableList<Data> = arrayListOf()
+    var favoriteGifIds: MutableList<String> = arrayListOf()
+    var favoriteGifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,19 +36,19 @@ class TrendingFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_gif_list, container, false)
+        return inflater.inflate(R.layout.fragment_favorite_gif_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(recyclerTrendingGifs) {
+        with(recyclerFavoriteGifs) {
             layoutManager = when {
-                columnCount <= 1 -> LinearLayoutManager(context)
-                else -> GridLayoutManager(context, columnCount)
+                columnCount <= 1 -> android.support.v7.widget.LinearLayoutManager(context)
+                else -> android.support.v7.widget.GridLayoutManager(context, columnCount)
             }
 
-            adapter = GIFRecyclerViewAdapter(gifList, listener)
+            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener)
         }
 
     }
@@ -76,9 +73,9 @@ class TrendingFragment : Fragment() {
 
         val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
 
-        val listTrendingGifs: Call<TrendingResponse> = giphyService.listTrendingGifs("20")
+        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
 
-        listTrendingGifs.enqueue(object : Callback<TrendingResponse?> {
+        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
@@ -89,9 +86,11 @@ class TrendingFragment : Fragment() {
                 val responseText = getRawResponse(response!!)
                 Log.d("GiphyService", responseText)
 
-                gifList.clear()
-                gifList.addAll(response?.body()!!.data)
-                recyclerTrendingGifs.adapter.notifyDataSetChanged()
+                if (response != null && response.body() != null) {
+                    favoriteGifList.clear()
+                    favoriteGifList.addAll(response?.body()!!.data)
+                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
+                }
             }
         })
     }
@@ -131,11 +130,52 @@ class TrendingFragment : Fragment() {
         listener = null
     }
 
+    fun updateFavoriteList(itemID: String) {
+        if (favoriteGifIds.contains(itemID)) favoriteGifIds.remove(itemID) else favoriteGifIds.add(itemID)
+
+        // TODO move to another place
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+
+
+        val retrofit = Retrofit.Builder()
+                .baseUrl("https://api.giphy.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+
+        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
+
+//        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
+//            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
+//                val responseText = t!!.message
+//                Log.d("GiphyService", responseText)
+////                call. // TODO
+//            }
+//
+//            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
+//                val responseText = getRawResponse(response!!)
+//                Log.d("GiphyService", responseText)
+//
+//                if (response != null && response.body() != null) {
+//                    favoriteGifList.clear()
+//                    favoriteGifList.addAll(response?.body()!!.data)
+//                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
+//                }
+//            }
+//        })
+    }
+
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
         @JvmStatic
         fun newInstance(columnCount: Int) =
-                TrendingFragment().apply {
+                FavoritesFragment().apply {
                     arguments = Bundle().apply {
                         putInt(ARG_COLUMN_COUNT, columnCount)
                     }
