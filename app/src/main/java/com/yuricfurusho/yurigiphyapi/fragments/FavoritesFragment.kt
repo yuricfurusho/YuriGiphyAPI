@@ -151,24 +151,31 @@ class FavoritesFragment : Fragment() {
 
         val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
 
-//        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
-//            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
-//                val responseText = t!!.message
-//                Log.d("GiphyService", responseText)
-////                call. // TODO
-//            }
-//
-//            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
-//                val responseText = getRawResponse(response!!)
-//                Log.d("GiphyService", responseText)
-//
-//                if (response != null && response.body() != null) {
-//                    favoriteGifList.clear()
-//                    favoriteGifList.addAll(response?.body()!!.data)
+        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
+            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
+                val responseText = t!!.message
+                Log.d("GiphyService", responseText)
+//                call. // TODO
+            }
+
+            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
+                val responseText = getRawResponse(response!!)
+                Log.d("GiphyService", responseText)
+
+                if (response != null && response.body() != null) {
+                    favoriteGifList.clear()
+                    favoriteGifList.addAll(response?.body()!!.data)
+                    updateRecycler()
 //                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
-//                }
-//            }
-//        })
+                }
+            }
+        })
+    }
+
+    private fun updateRecycler() {
+        val recyclerView = view!!.findViewById<android.support.v7.widget.RecyclerView>(R.id.recyclerFavoriteGifs)
+        recyclerView.adapter.notifyDataSetChanged()
+//        recyclerFavoriteGifs.adapter.notifyDataSetChanged()
     }
 
     companion object {
