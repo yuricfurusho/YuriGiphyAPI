@@ -2,6 +2,7 @@ package com.yuricfurusho.yurigiphyapi
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter
 import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
@@ -26,10 +27,22 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
 
         setSupportActionBar(toolbar)
         giphyPagerAdapter = GiphyPagerAdapter(supportFragmentManager)
-        container.adapter = giphyPagerAdapter
+        viewPagerMain.adapter = giphyPagerAdapter
 
-        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
-        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+        viewPagerMain.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPagerMain))
+
+        viewPagerMain.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+        })
     }
 
 }

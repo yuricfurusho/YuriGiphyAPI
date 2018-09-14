@@ -27,6 +27,12 @@ class FavoritesFragment : Fragment() {
     var favoriteGifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putSerializable(favoriteGifIds);
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -173,8 +179,8 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun updateRecycler() {
-        val recyclerView = view!!.findViewById<android.support.v7.widget.RecyclerView>(R.id.recyclerFavoriteGifs)
-        recyclerView.adapter.notifyDataSetChanged()
+//        val recyclerView = view!!.findViewById<android.support.v7.widget.RecyclerView>(R.id.recyclerFavoriteGifs)
+//        recyclerView.adapter.notifyDataSetChanged()
 //        recyclerFavoriteGifs.adapter.notifyDataSetChanged()
     }
 
