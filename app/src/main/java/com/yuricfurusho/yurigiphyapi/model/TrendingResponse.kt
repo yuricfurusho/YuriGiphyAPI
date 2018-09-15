@@ -10,6 +10,7 @@ data class TrendingResponse(
 
 
 data class Data(
+        var favorited: Boolean,
         val type: String,
         val id: String,
         val slug: String,

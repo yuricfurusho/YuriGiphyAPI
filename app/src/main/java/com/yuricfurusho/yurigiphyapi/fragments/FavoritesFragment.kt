@@ -3,6 +3,8 @@ package com.yuricfurusho.yurigiphyapi.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class FavoritesFragment : Fragment() {
     private var columnCount = 1
@@ -30,18 +33,13 @@ class FavoritesFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-//        outState.putSerializable(favoriteGifIds);
+        outState.putStringArrayList(FAVORITE_ID_LIST, favoriteGifIds as ArrayList<String>?)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-        favoriteGifIds.add("xT77XP9O9da9O04fAI")
-
+//        favoriteGifIds.add("xT77XP9O9da9O04fAI")
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
@@ -57,24 +55,23 @@ class FavoritesFragment : Fragment() {
 
         with(recyclerFavoriteGifs) {
             layoutManager = when {
-                columnCount <= 1 -> android.support.v7.widget.LinearLayoutManager(context)
-                else -> android.support.v7.widget.GridLayoutManager(context, columnCount)
+                columnCount <= 1 -> LinearLayoutManager(context)
+                else -> StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL)
             }
 
             adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener)
         }
         swipeFavoriteGifs.setOnRefreshListener { updateFavoriteList() }
-    }
 
-    override fun onResume() {
-        super.onResume()
-
-
+        if (savedInstanceState != null) {
+            savedInstanceState.getStringArrayList(FAVORITE_ID_LIST)
+        }
         updateFavoriteList()
     }
 
     fun updateFavoriteList() {
-        // TODO move to another place
+        swipeFavoriteGifs.isRefreshing = true
+
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
@@ -156,53 +153,14 @@ class FavoritesFragment : Fragment() {
     fun updateFavoriteList(itemID: String) {
         if (favoriteGifIds.contains(itemID)) favoriteGifIds.remove(itemID) else favoriteGifIds.add(itemID)
 
-        // TODO move to another place
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
+//        onSaveInstanceState()
 
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.giphy.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-
-        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
-
-        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
-
-        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
-            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
-                val responseText = t!!.message
-                Log.d("GiphyService", responseText)
-//                call. // TODO
-            }
-
-            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
-                val responseText = getRawResponse(response!!)
-                Log.d("GiphyService", responseText)
-
-                if (response != null && response.body() != null) {
-                    favoriteGifList.clear()
-                    favoriteGifList.addAll(response?.body()!!.data)
-                    updateRecycler()
-                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
-                }
-            }
-        })
-    }
-
-    private fun updateRecycler() {
-//        val recyclerView = view!!.findViewById<android.support.v7.widget.RecyclerView>(R.id.recyclerFavoriteGifs)
-//        recyclerView.adapter.notifyDataSetChanged()
-//        recyclerFavoriteGifs.adapter.notifyDataSetChanged()
+        updateFavoriteList()
     }
 
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
+        const val FAVORITE_ID_LIST = "favoriteIdList"
         @JvmStatic
         fun newInstance(columnCount: Int) =
                 FavoritesFragment().apply {

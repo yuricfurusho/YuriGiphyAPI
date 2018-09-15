@@ -23,17 +23,34 @@ class GIFRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Data = mGifObjectList[position]
+        if (item.favorited) {
+            holder.favButton.setImageResource(R.drawable.ic_favorite_24dp)
+        } else {
+            holder.favButton.setImageResource(R.drawable.ic_favorite_border_24dp)
+        }
 
-        Glide.with(holder.itemView).load(item.images.fixedHeightDownsampled.url).into(holder.imageViewGif)
+
+        Glide.with(holder.itemView)
+                .load(item.images.fixedHeightDownsampled.url)
+                .into(holder.imageViewGif)
 
         with(holder.imageViewGif) {
-            setOnClickListener { mListener?.onAddToFavorite(item.id) }
+            setOnClickListener {
+                item.apply { favorited = !favorited }
+                mListener?.onAddToFavorite(item.id)
+            }
         }
     }
 
     override fun getItemCount(): Int = mGifObjectList.size
 
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.imageViewGif.layout(0, 0, 0, 0)
+    }
+
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        val favButton: ImageView = mView.findViewById(R.id.favButton)
         val imageViewGif: ImageView = mView.findViewById(R.id.imageViewGif)
     }
 }

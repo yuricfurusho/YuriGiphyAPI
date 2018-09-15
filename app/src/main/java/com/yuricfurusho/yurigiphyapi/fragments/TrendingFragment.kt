@@ -59,6 +59,8 @@ class TrendingFragment : Fragment() {
     }
 
     private fun updateTrendingList() {
+        swipeTrendingGifs.isRefreshing = true
+
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()

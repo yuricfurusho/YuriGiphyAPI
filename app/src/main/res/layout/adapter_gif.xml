@@ -33,7 +33,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="@string/todo"
-        android:src="@drawable/ic_favorite_24dp"
+        android:src="@drawable/ic_favorite_selector_unchecked"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         />
