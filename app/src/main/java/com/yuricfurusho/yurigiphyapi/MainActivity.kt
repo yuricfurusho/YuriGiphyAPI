@@ -12,11 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
     override fun onAddToFavorite(itemID: String) {
 
-        val favoritesFrag: FavoritesFragment? = giphyPagerAdapter?.getItem(1) as FavoritesFragment?
-
+        val favoritesFrag: FavoritesFragment = supportFragmentManager
+                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_FAVORITES_VIEWPAGER_POSITION) as FavoritesFragment
         favoritesFrag?.updateFavoriteList(itemID)
-
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null

@@ -15,8 +15,8 @@ class GiphyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_TRENDING)
-            1 -> FavoritesFragment.newInstance(NUMBER_OF_COLUMNS_TAB_FAVORITES)
+            TAB_TRENDING_VIEWPAGER_POSITION -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_TRENDING)
+            TAB_FAVORITES_VIEWPAGER_POSITION -> FavoritesFragment.newInstance(NUMBER_OF_COLUMNS_TAB_FAVORITES)
             else -> PlaceholderFragment.newInstance(position + 1)
         }
     }
@@ -28,5 +28,7 @@ class GiphyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     companion object {
         const val NUMBER_OF_COLUMNS_TAB_TRENDING = 1
         const val NUMBER_OF_COLUMNS_TAB_FAVORITES = 2
+        const val TAB_TRENDING_VIEWPAGER_POSITION = 0
+        const val TAB_FAVORITES_VIEWPAGER_POSITION = 1
     }
 }

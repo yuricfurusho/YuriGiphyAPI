@@ -54,13 +54,11 @@ class TrendingFragment : Fragment() {
             adapter = GIFRecyclerViewAdapter(gifList, listener)
         }
 
+        swipeTrendingGifs.setOnRefreshListener { updateTrendingList() }
+
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-        // TODO move to another place
+    private fun updateTrendingList() {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
@@ -83,6 +81,8 @@ class TrendingFragment : Fragment() {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
 //                call. // TODO
+
+                swipeTrendingGifs.isRefreshing = false
             }
 
             override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
@@ -92,8 +92,17 @@ class TrendingFragment : Fragment() {
                 gifList.clear()
                 gifList.addAll(response?.body()!!.data)
                 recyclerTrendingGifs.adapter.notifyDataSetChanged()
+                swipeTrendingGifs.isRefreshing = false
             }
         })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+        updateTrendingList()
     }
 
     private fun getRawResponse(response: Response<*>): String {

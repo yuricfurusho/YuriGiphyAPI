@@ -30,11 +30,18 @@ class FavoritesFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putSerializable(favoriteGifIds);
+//        outState.putSerializable(favoriteGifIds);
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+        favoriteGifIds.add("xT77XP9O9da9O04fAI")
+
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
@@ -56,13 +63,17 @@ class FavoritesFragment : Fragment() {
 
             adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener)
         }
-
+        swipeFavoriteGifs.setOnRefreshListener { updateFavoriteList() }
     }
 
     override fun onResume() {
         super.onResume()
 
 
+        updateFavoriteList()
+    }
+
+    fun updateFavoriteList() {
         // TODO move to another place
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -85,7 +96,9 @@ class FavoritesFragment : Fragment() {
             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
-//                call. // TODO
+                //                call. // TODO
+
+                swipeFavoriteGifs.isRefreshing = false
             }
 
             override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
@@ -97,8 +110,12 @@ class FavoritesFragment : Fragment() {
                     favoriteGifList.addAll(response?.body()!!.data)
                     recyclerFavoriteGifs.adapter.notifyDataSetChanged()
                 }
+
+                swipeFavoriteGifs.isRefreshing = false
             }
         })
+
+
     }
 
     private fun getRawResponse(response: Response<*>): String {
@@ -172,7 +189,7 @@ class FavoritesFragment : Fragment() {
                     favoriteGifList.clear()
                     favoriteGifList.addAll(response?.body()!!.data)
                     updateRecycler()
-//                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
+                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
                 }
             }
         })
