@@ -1,12 +1,13 @@
 package com.yuricfurusho.yurigiphyapi.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-data class TrendingResponse(
+data class TrendingResponse (
         val data: List<Data>,
         val pagination: Pagination,
-        val meta: Meta)
+        val meta: Meta) : Serializable
 
 
 data class Data(

@@ -9,31 +9,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.yuricfurusho.yurigiphyapi.GiphyService
 import com.yuricfurusho.yurigiphyapi.R
 import com.yuricfurusho.yurigiphyapi.model.Data
-import com.yuricfurusho.yurigiphyapi.model.TrendingResponse
 import kotlinx.android.synthetic.main.fragment_favorite_gif_list.*
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class FavoritesFragment : Fragment() {
     private var columnCount = 1
-    var favoriteGifIds: MutableList<String> = arrayListOf()
     var favoriteGifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putStringArrayList(FAVORITE_ID_LIST, favoriteGifIds as ArrayList<String>?)
+        outState.putStringArrayList(FAVORITE_GIF_LIST, favoriteGifList as ArrayList<String>?)
 
     }
 
@@ -59,61 +50,61 @@ class FavoritesFragment : Fragment() {
                 else -> StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL)
             }
 
-            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener)
+            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener, columnCount != 1)
         }
-        swipeFavoriteGifs.setOnRefreshListener { updateFavoriteList() }
+//        swipeFavoriteGifs.setOnRefreshListener { updateFavoriteList() }
 
         if (savedInstanceState != null) {
-            savedInstanceState.getStringArrayList(FAVORITE_ID_LIST)
+            savedInstanceState.getStringArrayList(FAVORITE_GIF_LIST)
         }
-        updateFavoriteList()
+//        updateFavoriteList()
     }
 
-    fun updateFavoriteList() {
-        swipeFavoriteGifs.isRefreshing = true
-
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
-
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.giphy.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-
-        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
-
-        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
-
-        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
-            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
-                val responseText = t!!.message
-                Log.d("GiphyService", responseText)
-                //                call. // TODO
-
-                swipeFavoriteGifs.isRefreshing = false
-            }
-
-            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
-                val responseText = getRawResponse(response!!)
-                Log.d("GiphyService", responseText)
-
-                if (response != null && response.body() != null) {
-                    favoriteGifList.clear()
-                    favoriteGifList.addAll(response?.body()!!.data)
-                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
-                }
-
-                swipeFavoriteGifs.isRefreshing = false
-            }
-        })
-
-
-    }
+//    fun updateFavoriteList() {
+//        swipeFavoriteGifs.isRefreshing = true
+//
+//        val loggingInterceptor = HttpLoggingInterceptor()
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+//        val client = OkHttpClient.Builder()
+//                .addInterceptor(loggingInterceptor)
+//                .build()
+//
+//
+//        val retrofit = Retrofit.Builder()
+//                .baseUrl("https://api.giphy.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(client)
+//                .build()
+//
+//        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+//
+//        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
+//
+//        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
+//            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
+//                val responseText = t!!.message
+//                Log.d("GiphyService", responseText)
+//                //                call. // TODO
+//
+//                swipeFavoriteGifs.isRefreshing = false
+//            }
+//
+//            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
+//                val responseText = getRawResponse(response!!)
+//                Log.d("GiphyService", responseText)
+//
+//                if (response != null && response.body() != null) {
+//                    favoriteGifList.clear()
+//                    favoriteGifList.addAll(response?.body()!!.data)
+//                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
+//                }
+//
+//                swipeFavoriteGifs.isRefreshing = false
+//            }
+//        })
+//
+//
+//    }
 
     private fun getRawResponse(response: Response<*>): String {
         var responseText = "RawResponse: \n" + response.toString() + "\n"
@@ -150,17 +141,22 @@ class FavoritesFragment : Fragment() {
         listener = null
     }
 
-    fun updateFavoriteList(itemID: String) {
-        if (favoriteGifIds.contains(itemID)) favoriteGifIds.remove(itemID) else favoriteGifIds.add(itemID)
-
-//        onSaveInstanceState()
-
-        updateFavoriteList()
+    fun updateFavoriteList(data: Data) {
+        if (favoriteGifList.contains(data)) {
+            val indexOf = favoriteGifList.indexOf(data)
+            favoriteGifList.remove(data)
+            recyclerFavoriteGifs.adapter.notifyItemRemoved(indexOf)
+        } else {
+            favoriteGifList.add(data)
+            val indexOf = favoriteGifList.indexOf(data)
+//            favoriteGifList.get(indexOf).apply { favorited = !favorited }
+            recyclerFavoriteGifs.adapter.notifyItemInserted(indexOf)
+        }
     }
 
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
-        const val FAVORITE_ID_LIST = "favoriteIdList"
+        const val FAVORITE_GIF_LIST = "favoriteIdList"
         @JvmStatic
         fun newInstance(columnCount: Int) =
                 FavoritesFragment().apply {

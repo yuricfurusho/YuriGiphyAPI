@@ -1,5 +1,7 @@
 package com.yuricfurusho.yurigiphyapi.fragments
 
+import com.yuricfurusho.yurigiphyapi.model.Data
+
 interface OnListFragmentInteractionListener {
-    fun onAddToFavorite(item: String)
+    fun onAddToFavorite(data: Data)
 }

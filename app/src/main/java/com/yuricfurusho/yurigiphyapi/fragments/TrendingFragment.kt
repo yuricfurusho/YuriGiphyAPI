@@ -51,7 +51,7 @@ class TrendingFragment : Fragment() {
                 else -> GridLayoutManager(context, columnCount)
             }
 
-            adapter = GIFRecyclerViewAdapter(gifList, listener)
+            adapter = GIFRecyclerViewAdapter(gifList, listener, columnCount != 1)
         }
 
         swipeTrendingGifs.setOnRefreshListener { updateTrendingList() }
@@ -140,6 +140,11 @@ class TrendingFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    fun updateFavoriteList(data: Data) {
+        val index = gifList.indexOf(data)
+        recyclerTrendingGifs.adapter.notifyItemChanged(index)
     }
 
     companion object {
