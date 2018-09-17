@@ -6,4 +6,5 @@
     <string name="content_description_there_is_giphy_image_here">There is GIPHY image here.</string>
     <string name="todo">TODO</string>
     <string name="search_hint">Search animated gifs</string>
+    <string name="action_search_gif">Search Gif</string>
 </resources>

@@ -41,7 +41,7 @@ data class Data(
         val images: Images,
         val title: String,
         @SerializedName("_score")
-        val score: Int
+        val score: Any
 ) : Serializable
 
 data class User(

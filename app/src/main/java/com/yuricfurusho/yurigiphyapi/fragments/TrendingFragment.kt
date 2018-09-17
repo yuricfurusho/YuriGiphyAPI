@@ -74,7 +74,7 @@ class TrendingFragment : Fragment() {
                 .client(client)
                 .build()
 
-        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java)
 
         val listTrendingGifs: Call<TrendingResponse> = giphyService.listTrendingGifs("20")
 
@@ -92,7 +92,7 @@ class TrendingFragment : Fragment() {
                 Log.d("GiphyService", responseText)
 
                 gifList.clear()
-                gifList.addAll(response?.body()!!.data)
+                gifList.addAll(response.body()!!.data)
                 recyclerTrendingGifs.adapter.notifyDataSetChanged()
                 swipeTrendingGifs.isRefreshing = false
             }
@@ -116,7 +116,7 @@ class TrendingFragment : Fragment() {
                 .client(client)
                 .build()
 
-        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java)
 
         val listResultsGifs: Call<TrendingResponse> = giphyService.searchGifs(query)
 
@@ -134,7 +134,7 @@ class TrendingFragment : Fragment() {
                 Log.d("GiphyService", responseText)
 
                 gifList.clear()
-                gifList.addAll(response?.body()!!.data)
+                gifList.addAll(response.body()!!.data)
                 recyclerTrendingGifs.adapter.notifyDataSetChanged()
                 swipeTrendingGifs.isRefreshing = false
             }
@@ -144,7 +144,6 @@ class TrendingFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
 
         updateTrendingList()
     }
