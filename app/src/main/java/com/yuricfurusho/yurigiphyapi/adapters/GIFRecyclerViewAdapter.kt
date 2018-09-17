@@ -30,9 +30,9 @@ class GIFRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data: Data = mGifObjectList[position]
         if (data.favorited) {
-            holder.favButton.setImageResource(R.drawable.ic_favorite_24dp)
+            holder.favButton.setImageResource(R.drawable.ic_favorite_selector_checked)
         } else {
-            holder.favButton.setImageResource(R.drawable.ic_favorite_border_24dp)
+            holder.favButton.setImageResource(R.drawable.ic_favorite_selector_unchecked)
         }
 
 
@@ -40,7 +40,7 @@ class GIFRecyclerViewAdapter(
                 .load(data.images.fixedHeightDownsampled.url)
                 .into(holder.imageViewGif)
 
-        with(holder.imageViewGif) {
+        with(holder.favButton) {
             setOnClickListener {
                 data.apply { favorited = !favorited }
                 mListener?.onAddToFavorite(data)
