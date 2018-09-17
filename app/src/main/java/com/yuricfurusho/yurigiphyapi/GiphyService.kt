@@ -16,5 +16,5 @@ interface GiphyService {
 
     //    @GET("v1/gifs/trending?api_key=" + API_KEY) TODO
     @GET("v1/gifs/trending?api_key=2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2")
-    fun listGifs(@Query("limit") limit: String): Call<TrendingResponse>
+    fun listTrendingGifs(@Query("limit") limit: String): Call<TrendingResponse>
 }

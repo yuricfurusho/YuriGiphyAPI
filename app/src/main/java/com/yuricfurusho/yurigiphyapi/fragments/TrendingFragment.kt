@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TrendingFragment : Fragment() {
     private var columnCount = 1
-    var gifList: List<Data> = arrayListOf()
+    var gifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,16 +51,21 @@ class TrendingFragment : Fragment() {
                 else -> GridLayoutManager(context, columnCount)
             }
 
-            adapter = GIFRecyclerViewAdapter(gifList, listener)
+            adapter = GIFRecyclerViewAdapter(gifList, listener, columnCount != 1)
         }
 
+        swipeTrendingGifs.setOnRefreshListener { updateTrendingList() }
     }
 
     override fun onResume() {
         super.onResume()
 
+        updateTrendingList()
+    }
 
-        // TODO move to another place
+    private fun updateTrendingList() {
+        swipeTrendingGifs.isRefreshing = true
+
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
@@ -76,25 +81,24 @@ class TrendingFragment : Fragment() {
 
         val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
 
-        val listGifs: Call<TrendingResponse> = giphyService.listGifs("20")
+        val listTrendingGifs: Call<TrendingResponse> = giphyService.listTrendingGifs("20")
 
-
-
-
-        listGifs.enqueue(object : Callback<TrendingResponse?> {
+        listTrendingGifs.enqueue(object : Callback<TrendingResponse?> {
             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
-//                call. // TODO
+
+                swipeTrendingGifs.isRefreshing = false
             }
 
             override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
                 val responseText = getRawResponse(response!!)
                 Log.d("GiphyService", responseText)
 
-                gifList = response?.body()!!.data
-//                recyclerTrendingGifs.adapter.notifyDataSetChanged()
-                recyclerTrendingGifs.adapter = GIFRecyclerViewAdapter(gifList, listener)
+                gifList.clear()
+                gifList.addAll(response?.body()!!.data)
+                recyclerTrendingGifs.adapter.notifyDataSetChanged()
+                swipeTrendingGifs.isRefreshing = false
             }
         })
     }
@@ -134,8 +138,9 @@ class TrendingFragment : Fragment() {
         listener = null
     }
 
-    interface OnListFragmentInteractionListener {
-        fun onAddToFavorite(item: Any?)
+    fun updateFavoriteList(data: Data) {
+        val index = gifList.indexOf(data)
+        recyclerTrendingGifs.adapter.notifyItemChanged(index)
     }
 
     companion object {
