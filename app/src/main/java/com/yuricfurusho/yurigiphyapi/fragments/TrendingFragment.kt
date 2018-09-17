@@ -82,7 +82,6 @@ class TrendingFragment : Fragment() {
             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
-//                call. // TODO
 
                 swipeTrendingGifs.isRefreshing = false
             }
@@ -124,7 +123,6 @@ class TrendingFragment : Fragment() {
             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
                 val responseText = t!!.message
                 Log.d("GiphyService", responseText)
-//                call. // TODO
 
                 swipeTrendingGifs.isRefreshing = false
             }

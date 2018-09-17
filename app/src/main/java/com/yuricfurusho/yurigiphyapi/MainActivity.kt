@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
         viewPagerMain.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPagerMain))
 
-        // Get the intent, verify the action and get the query
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
             doMySearch(query)
@@ -48,7 +47,6 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        // Get the intent, verify the action and get the query
         if (intent != null) {
             if (Intent.ACTION_SEARCH == intent.action) {
                 val query = intent.getStringExtra(SearchManager.QUERY)
