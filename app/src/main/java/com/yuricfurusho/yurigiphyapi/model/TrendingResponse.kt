@@ -42,7 +42,7 @@ data class Data(
         val title: String,
         @SerializedName("_score")
         val score: Int
-)
+) : Serializable
 
 data class User(
         @SerializedName("avatar_url")
@@ -58,7 +58,7 @@ data class User(
         val displayName: String,
         @SerializedName("is_verified")
         val isVerified: Boolean
-)
+) : Serializable
 
 data class Images(
         @SerializedName("fixed_height_still")
@@ -104,27 +104,27 @@ data class Images(
         val previewGif: PreviewGif,
         @SerializedName("480w_still")
         val wStill: WStill
-)
+) : Serializable
 
 data class WStill(
         val url: String,
         val width: String,
         val height: String
-)
+) : Serializable
 
 data class OriginalStill(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class DownsizedLarge(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class Preview(
         val width: String,
@@ -132,7 +132,7 @@ data class Preview(
         val mp4: String,
         @SerializedName("mp4_size")
         val mp4Size: String
-)
+) : Serializable
 
 data class FixedWidthStill(
         val url: String,
@@ -146,20 +146,20 @@ data class DownsizedMedium(
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class Looping(
         val mp4: String,
         @SerializedName("mp4_size")
         val mp4Size: String
-)
+) : Serializable
 
 data class FixedHeightStill(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class Original(
         val url: String,
@@ -174,7 +174,7 @@ data class Original(
         @SerializedName("webp_size")
         val webpSize: String,
         val hash: String
-)
+) : Serializable
 
 data class OriginalMp4(
         val width: String,
@@ -189,14 +189,14 @@ data class Downsized(
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class PreviewGif(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class FixedHeightDownsampled(
         val url: String,
@@ -206,7 +206,7 @@ data class FixedHeightDownsampled(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class FixedHeightSmall(
         val url: String,
@@ -219,21 +219,21 @@ data class FixedHeightSmall(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class DownsizedStill(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class FixedHeightSmallStill(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class Hd(
         val width: String,
@@ -241,7 +241,7 @@ data class Hd(
         val mp4: String,
         @SerializedName("mp4_size")
         val mp4Size: String
-)
+) : Serializable
 
 data class DownsizedSmall(
         val width: String,
@@ -249,7 +249,7 @@ data class DownsizedSmall(
         val mp4: String,
         @SerializedName("mp4_size")
         val mp4Size: String
-)
+) : Serializable
 
 data class FixedWidthDownsampled(
         val url: String,
@@ -259,14 +259,14 @@ data class FixedWidthDownsampled(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class PreviewWebp(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class FixedWidth(
         val url: String,
@@ -279,7 +279,7 @@ data class FixedWidth(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class FixedHeight(
         val url: String,
@@ -292,7 +292,7 @@ data class FixedHeight(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class FixedWidthSmall(
         val url: String,
@@ -305,25 +305,25 @@ data class FixedWidthSmall(
         val webp: String,
         @SerializedName("webp_size")
         val webpSize: String
-)
+) : Serializable
 
 data class FixedWidthSmallStill(
         val url: String,
         val width: String,
         val height: String,
         val size: String
-)
+) : Serializable
 
 data class Pagination(
         @SerializedName("total_count")
         val totalCount: Int,
         val count: Int,
         val offset: Int
-)
+) : Serializable
 
 data class Meta(
         val status: Int,
         val msg: String,
         @SerializedName("response_id")
         val responseId: String
-)
+) : Serializable

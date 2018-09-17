@@ -100,6 +100,48 @@ class TrendingFragment : Fragment() {
 
     }
 
+    private fun searchGifOnServer(query: String?) {
+        swipeTrendingGifs.isRefreshing = true
+
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+
+
+        val retrofit = Retrofit.Builder()
+                .baseUrl("https://api.giphy.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+
+        val listResultsGifs: Call<TrendingResponse> = giphyService.searchGifs(query)
+
+        listResultsGifs.enqueue(object : Callback<TrendingResponse?> {
+            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
+                val responseText = t!!.message
+                Log.d("GiphyService", responseText)
+//                call. // TODO
+
+                swipeTrendingGifs.isRefreshing = false
+            }
+
+            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
+                val responseText = getRawResponse(response!!)
+                Log.d("GiphyService", responseText)
+
+                gifList.clear()
+                gifList.addAll(response?.body()!!.data)
+                recyclerTrendingGifs.adapter.notifyDataSetChanged()
+                swipeTrendingGifs.isRefreshing = false
+            }
+        })
+
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -145,6 +187,10 @@ class TrendingFragment : Fragment() {
     fun updateFavoriteList(data: Data) {
         val index = gifList.indexOf(data)
         recyclerTrendingGifs.adapter.notifyItemChanged(index)
+    }
+
+    fun searchGif(query: String?) {
+        searchGifOnServer(query)
     }
 
     companion object {
