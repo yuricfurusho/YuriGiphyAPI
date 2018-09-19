@@ -8,12 +8,13 @@ import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.Menu
+import com.bumptech.glide.Glide
+import com.yuricfurusho.yurigiphyapi.R.id.*
 import com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter
 import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
 import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
 import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment
 import com.yuricfurusho.yurigiphyapi.model.Data
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
     override fun onAddToFavorite(data: Data) {
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
                 .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_FAVORITES_VIEWPAGER_POSITION) as FavoritesFragment
         trendingFrag.updateFavoriteList(data)
         favoritesFrag.updateFavoriteList(data)
+
+        Glide.with(applicationContext)
+                .asBitmap()
+                .load(data.images.fixedHeightDownsampled.url)
+                .in
+
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null
