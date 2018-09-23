@@ -49,12 +49,6 @@
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/imgDeTESTE"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:src="@drawable/ic_favorite_24dp"/>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerMain"
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import com.yuricfurusho.yurigiphyapi.R
 import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
 import com.yuricfurusho.yurigiphyapi.model.Data
 
+
 class GIFRecyclerViewAdapter(
         private val mGifObjectList: MutableList<Data>,
         private val mListener: OnListFragmentInteractionListener?,
@@ -39,6 +40,20 @@ class GIFRecyclerViewAdapter(
         Glide.with(holder.itemView)
                 .load(data.images.fixedHeightDownsampled.url)
                 .into(holder.imageViewGif)
+
+//
+//        Glide.with(holder.itemView)
+//                .load(data.images.fixedHeightDownsampled.url)
+//                .listener(object : RequestListener<Drawable> {
+//                    override fun onLoadFailed(p0: GlideException?, p1: Any?, p2: Target<Drawable>?, p3: Boolean): Boolean {
+//                    }
+//                    override fun onResourceReady(p0: Drawable?, p1: Any?, p2: Target<Drawable>?, p3: DataSource?, p4: Boolean): Boolean {
+//                        Log.d("das", "OnResourceReady")
+//                        //do something when picture already loaded
+//                        return false
+//                    }
+//                })
+//                .into(holder.imageViewGif)
 
         with(holder.favButton) {
             setOnClickListener {

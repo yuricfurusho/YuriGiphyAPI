@@ -13,7 +13,7 @@ import android.view.Menu
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.target.ViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter
 import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
 import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
@@ -22,6 +22,7 @@ import com.yuricfurusho.yurigiphyapi.model.Data
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
@@ -34,31 +35,31 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
         trendingFrag.updateFavoriteList(data)
         favoritesFrag.updateFavoriteList(data)
 
-
-
-//
-//        val futureTarget = Glide.with(applicationContext)
-//                .asBitmap()
-//                .load(data.images.fixedHeightDownsampled.url)
-//                .submit()
-//
-//
-//
-//
-//        val bitmap = futureTarget.get()
-
-//
-//        val into = Glide.with(applicationContext)
-//                .load(data.images.fixedHeightDownsampled.url)
-//                .into(Target<Bitmap>());
-
-        val target = Target<Bitmap>()
-        val into = Glide.with(applicationContext)
+        Glide.with(application)
                 .asBitmap()
                 .load(data.images.fixedHeightDownsampled.url)
-                .into(target)
+                // .fitCenter()
+                .into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        try {
+                            saveImage(data, resource)
+
+                        }
+                        catch (e: IOException) {
+                            // handle exception
+                        }
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        // handle exception
+                    }
+                })
 
 
+
+    }
+
+    fun saveImage(data: Data, bitmap: Bitmap) {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val byteArray = stream.toByteArray()
@@ -72,18 +73,14 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
         }
 
         // Do something with the Bitmap and then when you're done with it:
-        Glide.with(applicationContext).clear(futureTarget)
+//        Glide.with(applicationContext).clear(futureTarget)
 
 
         val fileStreamPath: File = getFileStreamPath(filename)
         fileStreamPath.absolutePath
 
+        data.file = fileStreamPath
 
-
-
-        Glide.with(applicationContext)
-                .load(fileStreamPath.absolutePath)
-                .into(imgDeTESTE)
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null

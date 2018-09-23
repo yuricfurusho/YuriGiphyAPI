@@ -1,6 +1,7 @@
 package com.yuricfurusho.yurigiphyapi.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.File
 import java.io.Serializable
 
 
@@ -12,6 +13,7 @@ data class TrendingResponse (
 
 data class Data(
         var favorited: Boolean,
+        var file: File,
         val type: String,
         val id: String,
         val slug: String,
