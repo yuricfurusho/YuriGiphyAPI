@@ -1,5 +1,6 @@
 package com.yuricfurusho.yurigiphyapi.model
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -11,7 +12,7 @@ import android.arch.persistence.room.Query
 interface DataDao {
 
     @Query("SELECT * from Data ORDER BY id ASC")
-    fun getAllData(): List<Data>
+    fun getAllData(): LiveData<List<Data>>
 
     @Insert
     fun insert(data: Data)
