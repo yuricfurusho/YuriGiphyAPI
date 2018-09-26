@@ -1,5 +1,7 @@
 package com.yuricfurusho.yurigiphyapi.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.File
 import java.io.Serializable
@@ -10,11 +12,12 @@ data class TrendingResponse (
         val pagination: Pagination,
         val meta: Meta) : Serializable
 
-
+@Entity
 data class Data(
         var favorited: Boolean,
         var file: File,
         val type: String,
+        @PrimaryKey
         val id: String,
         val slug: String,
         val url: String,
