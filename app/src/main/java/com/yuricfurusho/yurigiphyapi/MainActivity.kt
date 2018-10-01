@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
         val fileStreamPath: File = getFileStreamPath(filename)
         fileStreamPath.absolutePath
 
-        data.file = fileStreamPath
-
+        data.filePath = fileStreamPath
+                .absolutePath
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null
