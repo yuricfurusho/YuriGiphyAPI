@@ -12,7 +12,7 @@ import android.arch.persistence.room.Query
 interface DataDao {
 
     @Query("SELECT * from Data ORDER BY id ASC")
-    fun getAllData(): LiveData<List<Data>>
+    fun getAllData(): LiveData<MutableList<Data>>
 
     @Insert
     fun insert(data: Data)

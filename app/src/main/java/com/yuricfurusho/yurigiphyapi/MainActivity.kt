@@ -1,6 +1,8 @@
 package com.yuricfurusho.yurigiphyapi
 
 import android.app.SearchManager
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -37,15 +39,14 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
 
         Glide.with(application)
                 .asBitmap()
-                .load(data.images.fixedHeightDownsampled.url)
+                .load(data.images?.fixedHeightDownsampled?.url)
                 // .fitCenter()
                 .into(object : SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         try {
                             saveImage(data, resource)
 
-                        }
-                        catch (e: IOException) {
+                        } catch (e: IOException) {
                             // handle exception
                         }
                     }
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
                         // handle exception
                     }
                 })
-
 
 
     }
@@ -81,6 +81,18 @@ class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
 
         data.filePath = fileStreamPath
                 .absolutePath
+
+
+        val trendingFrag: TrendingFragment = supportFragmentManager
+                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_TRENDING_VIEWPAGER_POSITION) as TrendingFragment
+        val favoritesFrag: FavoritesFragment = supportFragmentManager
+                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_FAVORITES_VIEWPAGER_POSITION) as FavoritesFragment
+        trendingFrag.updateFavoriteList(data)
+        favoritesFrag.updateFavoriteList(data)
+
+
+        trendingFrag.giphyViewModel?.insert(data)
+
     }
 
     private var giphyPagerAdapter: GiphyPagerAdapter? = null

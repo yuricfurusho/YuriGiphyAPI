@@ -1,5 +1,7 @@
 package com.yuricfurusho.yurigiphyapi.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,17 +10,27 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.yuricfurusho.yurigiphyapi.GiphyViewModel
 import com.yuricfurusho.yurigiphyapi.R
+import com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter
 import com.yuricfurusho.yurigiphyapi.model.Data
 import kotlinx.android.synthetic.main.fragment_favorite_gif_list.*
+import kotlinx.android.synthetic.main.fragment_gif_list.*
 
 class FavoritesFragment : Fragment() {
     private var columnCount = 1
-    var favoriteGifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
+    public lateinit var giphyViewModel: GiphyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        giphyViewModel = ViewModelProviders.of(this).get(GiphyViewModel::class.java)
+
+        giphyViewModel.allData.observe(this, Observer { dataList ->
+            // Update the cached copy of the words in the adapter.
+            dataList?.let { (recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).setDataList(it) }
+        })
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
@@ -38,7 +50,7 @@ class FavoritesFragment : Fragment() {
                 else -> StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL)
             }
 
-            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener, columnCount != 1)
+            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(context, listener, columnCount != 1)
         }
     }
 
@@ -57,13 +69,13 @@ class FavoritesFragment : Fragment() {
     }
 
     fun updateFavoriteList(data: Data) {
-        if (favoriteGifList.contains(data)) {
-            val indexOf = favoriteGifList.indexOf(data)
-            favoriteGifList.remove(data)
+        if ((recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).dataList.contains(data)) {
+            val indexOf = (recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).dataList.indexOf(data)
+            (recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).dataList.remove(data)
             recyclerFavoriteGifs.adapter.notifyItemRemoved(indexOf)
         } else {
-            favoriteGifList.add(data)
-            val indexOf = favoriteGifList.indexOf(data)
+            (recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).dataList.add(data)
+            val indexOf = (recyclerFavoriteGifs.adapter as GIFRecyclerViewAdapter).dataList.indexOf(data)
             recyclerFavoriteGifs.adapter.notifyItemInserted(indexOf)
         }
     }

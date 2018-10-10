@@ -13,7 +13,7 @@ import kotlin.coroutines.experimental.CoroutineContext
 class GiphyViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: DataRepository
-    val allData: LiveData<List<Data>>
+    val allData: LiveData<MutableList<Data>>
 
     private var parentJob = Job()
 
@@ -24,7 +24,7 @@ class GiphyViewModel(application: Application) : AndroidViewModel(application) {
 
 
     init {
-        val dataDao = DataRoomDatabase.getDatabase(application).dataDao()
+        val dataDao = DataRoomDatabase.getDatabase(application, scope).dataDao()
         repository = DataRepository(dataDao)
         allData = repository.allData
     }

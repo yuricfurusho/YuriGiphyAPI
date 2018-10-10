@@ -1,5 +1,7 @@
 package com.yuricfurusho.yurigiphyapi.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yuricfurusho.yurigiphyapi.GiphyService
+import com.yuricfurusho.yurigiphyapi.GiphyViewModel
 import com.yuricfurusho.yurigiphyapi.R
 import com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter
 import com.yuricfurusho.yurigiphyapi.model.Data
@@ -27,11 +30,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TrendingFragment : Fragment() {
     private var columnCount = 1
-    var gifList: MutableList<Data> = arrayListOf()
     private var listener: OnListFragmentInteractionListener? = null
+    public lateinit var giphyViewModel: GiphyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        giphyViewModel = ViewModelProviders.of(this).get(GiphyViewModel::class.java)
+
+        giphyViewModel.allData.observe(this, Observer { dataList ->
+            // Update the cached copy of the words in the adapter.
+            dataList?.let { (recyclerTrendingGifs.adapter as GIFRecyclerViewAdapter).setDataList(it) }
+        })
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
@@ -51,7 +61,7 @@ class TrendingFragment : Fragment() {
                 else -> GridLayoutManager(context, columnCount)
             }
 
-            adapter = GIFRecyclerViewAdapter(gifList, listener, columnCount != 1)
+            adapter = GIFRecyclerViewAdapter(context, listener, columnCount != 1)
         }
 
         swipeTrendingGifs.setOnRefreshListener { updateTrendingList() }
@@ -90,9 +100,11 @@ class TrendingFragment : Fragment() {
                 val responseText = getRawResponse(response!!)
                 Log.d("GiphyService", responseText)
 
-                gifList.clear()
-                gifList.addAll(response.body()!!.data)
-                recyclerTrendingGifs.adapter.notifyDataSetChanged()
+
+                (recyclerTrendingGifs.adapter as GIFRecyclerViewAdapter).setDataList(response.body()!!.data)
+//                gifList.clear()
+//                gifList.addAll(response.body()!!.data)
+//                recyclerTrendingGifs.adapter.notifyDataSetChanged()
                 swipeTrendingGifs.isRefreshing = false
             }
         })
@@ -131,8 +143,10 @@ class TrendingFragment : Fragment() {
                 val responseText = getRawResponse(response!!)
                 Log.d("GiphyService", responseText)
 
-                gifList.clear()
-                gifList.addAll(response.body()!!.data)
+                (recyclerTrendingGifs.adapter as GIFRecyclerViewAdapter).setDataList(response.body()!!.data)
+
+//                gifList.clear()
+//                gifList.addAll(response.body()!!.data)
                 recyclerTrendingGifs.adapter.notifyDataSetChanged()
                 swipeTrendingGifs.isRefreshing = false
             }
@@ -182,7 +196,7 @@ class TrendingFragment : Fragment() {
     }
 
     fun updateFavoriteList(data: Data) {
-        val index = gifList.indexOf(data)
+        val index = (recyclerTrendingGifs.adapter as GIFRecyclerViewAdapter).dataList.indexOf(data)
         recyclerTrendingGifs.adapter.notifyItemChanged(index)
     }
 

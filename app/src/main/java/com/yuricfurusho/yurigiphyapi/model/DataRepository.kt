@@ -8,7 +8,7 @@ import android.support.annotation.WorkerThread
  */
 class DataRepository(private val dao: DataDao) {
 
-    val allData: LiveData<List<Data>> = dao.getAllData()
+    val allData: LiveData<MutableList<Data>> = dao.getAllData()
 
     @WorkerThread
     suspend fun insert(data: Data) {
