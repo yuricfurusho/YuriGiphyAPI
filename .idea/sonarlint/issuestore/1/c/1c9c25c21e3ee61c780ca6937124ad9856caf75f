@@ -1,0 +1,32 @@
+
+bsquid:S1192"HDefine a constant instead of duplicating this literal "INTEGER" 3 times.(ò°„Ëùÿÿÿÿ
+ssquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÕéØÖıÿÿÿÿ
+ssquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Şü“âÿÿÿÿÿ
+ssquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥Ù´øûÿÿÿÿ
+tsquid:S1488"_Immediately return this expression instead of assigning it to the temporary variable "_helper".(ªêª”
+csquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(“ë©í
+isquid:S00116"SRename this field "_dataDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Úè¤
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±„«§úÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½›Ó¥ÿÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àùü
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞíßÛüÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÜœÅıÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á‹Ìá
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕéØÖıÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şü“âÿÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Ù´øûÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€êùóúÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨²Şùÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ıŞŸûÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªêª”
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ê×¶ùÿÿÿÿ
+rsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(–çÀ/
+ssquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±
+xsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ôİÕıÿÿÿÿ
+xsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(¤î˜Óüÿÿÿÿ
+…squid:UselessImportCheck"^Remove this unused import 'android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration'.(Î½“Êûÿÿÿÿ
+ysquid:UselessImportCheck"RRemove this unused import 'android.arch.persistence.room.RoomOpenHelper.Delegate'.(©®˜‡ÿÿÿÿÿ
+vsquid:UselessImportCheck"ORemove this unused import 'android.arch.persistence.room.util.TableInfo.Index'.(Ş¶ğÃùÿÿÿÿ
+€squid:UselessImportCheck"YRemove this unused import 'android.arch.persistence.db.SupportSQLiteOpenHelper.Callback'.(‰·‹®şÿÿÿÿ
+vsquid:UselessImportCheck"TRemove this unused import 'android.arch.persistence.room.util.TableInfo.ForeignKey'.(µòÙ
+wsquid:UselessImportCheck"PRemove this unused import 'android.arch.persistence.room.util.TableInfo.Column'.(´Ç©íıÿÿÿÿ

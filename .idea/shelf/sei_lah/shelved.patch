@@ -1,0 +1,1225 @@
+Index: app/src/main/res/layout/fragment_favorite_gif_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_favorite_gif_list.xml	(date 1537276428855)
++++ app/src/main/res/layout/fragment_favorite_gif_list.xml	(date 1537276428855)
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="utf-8"?>
++
++<!--<android.support.v4.widget.SwipeRefreshLayout-->
++    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
++    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
++    <!--xmlns:tools="http://schemas.android.com/tools"-->
++    <!--android:id="@+id/swipeFavoriteGifs"-->
++    <!--android:layout_width="match_parent"-->
++    <!--android:layout_height="match_parent">-->
++
++    <android.support.v7.widget.RecyclerView
++        android:id="@+id/recyclerFavoriteGifs"
++        android:name="com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment"
++        xmlns:android="http://schemas.android.com/apk/res/android"
++        xmlns:app="http://schemas.android.com/apk/res-auto"
++        xmlns:tools="http://schemas.android.com/tools"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_marginLeft="16dp"
++        android:layout_marginRight="16dp"
++        app:layoutManager="LinearLayoutManager"
++        tools:context=".fragments.FavoritesFragment"
++        tools:listitem="@layout/adapter_gif"/>
++
++<!--</android.support.v4.widget.SwipeRefreshLayout>-->
+Index: .idea/assetWizardSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/assetWizardSettings.xml	(date 1537276428784)
++++ .idea/assetWizardSettings.xml	(date 1537276428784)
+@@ -0,0 +1,47 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="WizardSettings">
++    <option name="children">
++      <map>
++        <entry key="vectorWizard">
++          <value>
++            <PersistentState>
++              <option name="children">
++                <map>
++                  <entry key="vectorAssetStep">
++                    <value>
++                      <PersistentState>
++                        <option name="children">
++                          <map>
++                            <entry key="clipartAsset">
++                              <value>
++                                <PersistentState>
++                                  <option name="values">
++                                    <map>
++                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_search_black_24dp.xml" />
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                          </map>
++                        </option>
++                        <option name="values">
++                          <map>
++                            <entry key="autoMirrored" value="true" />
++                            <entry key="outputName" value="ic_search_black_24dp" />
++                            <entry key="sourceFile" value="C:\Users\05849227954" />
++                          </map>
++                        </option>
++                      </PersistentState>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </PersistentState>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/menu/options_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/menu/options_menu.xml	(date 1537276428862)
++++ app/src/main/res/menu/options_menu.xml	(date 1537276428862)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<menu xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto">
++    <item
++        android:id="@+id/action_search"
++        android:icon="@drawable/ic_search_white_24dp"
++        android:title="@string/action_search_gif"
++        app:actionViewClass="android.support.v7.widget.SearchView"
++        app:showAsAction="ifRoom|collapseActionView" />
++</menu>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_search_white_24dp.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_search_white_24dp.xml	(date 1537276428841)
++++ app/src/main/res/drawable/ic_search_white_24dp.xml	(date 1537276428841)
+@@ -0,0 +1,10 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:autoMirrored="true"
++    android:viewportHeight="24.0"
++    android:viewportWidth="24.0">
++    <path
++        android:fillColor="#FFFFFFFF"
++        android:pathData="M15.5,14h-0.79l-0.28,-0.27C15.41,12.59 16,11.11 16,9.5 16,5.91 13.09,3 9.5,3S3,5.91 3,9.5 5.91,16 9.5,16c1.61,0 3.09,-0.59 4.23,-1.57l0.27,0.28v0.79l5,4.99L20.49,19l-4.99,-5zM9.5,14C7.01,14 5,11.99 5,9.5S7.01,5 9.5,5 14,7.01 14,9.5 11.99,14 9.5,14z" />
++</vector>
+Index: app/src/main/res/layout/adapter_gif_favorite.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/adapter_gif_favorite.xml	(date 1537276428852)
++++ app/src/main/res/layout/adapter_gif_favorite.xml	(date 1537276428852)
+@@ -0,0 +1,71 @@
++<?xml version="1.0" encoding="utf-8"?>
++<android.support.constraint.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:background="#000"
++    android:orientation="horizontal">
++
++    <ImageView
++        android:id="@+id/imageViewGif"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:contentDescription="@string/content_description_there_is_giphy_image_here"
++        android:scaleType="fitCenter"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        tools:src="@drawable/ic_launcher_background"/>
++
++    <View
++        android:layout_width="0dp"
++        android:layout_height="0dp"
++        android:background="@drawable/shape_shadow_gradient"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        />
++
++    <ImageView
++        android:id="@+id/favButton"
++        android:layout_width="32dp"
++        android:layout_height="32dp"
++        android:contentDescription="@string/todo"
++        android:src="@drawable/ic_favorite_border_24dp"
++        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
++        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
++        />
++
++    <android.support.constraint.Guideline
++        android:id="@+id/guidelineStart"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        app:layout_constraintGuide_begin="8dp"/>
++
++    <android.support.constraint.Guideline
++        android:id="@+id/guidelineEnd"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        app:layout_constraintGuide_end="8dp"/>
++
++    <android.support.constraint.Guideline
++        android:id="@+id/guidelineTop"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal"
++        app:layout_constraintGuide_begin="8dp"/>
++
++    <android.support.constraint.Guideline
++        android:id="@+id/guidelineBottom"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal"
++        app:layout_constraintGuide_end="8dp"/>
++
++
++</android.support.constraint.ConstraintLayout>
+Index: app/src/main/res/drawable/ic_favorite_selector_unchecked.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_favorite_selector_unchecked.xml	(date 1537276428837)
++++ app/src/main/res/drawable/ic_favorite_selector_unchecked.xml	(date 1537276428837)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:drawable="@drawable/ic_favorite_24dp" android:state_pressed="true"/>
++    <item android:drawable="@drawable/ic_favorite_border_24dp" android:state_pressed="false"/>
++
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_favorite_selector_checked.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_favorite_selector_checked.xml	(date 1537276428835)
++++ app/src/main/res/drawable/ic_favorite_selector_checked.xml	(date 1537276428835)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:drawable="@drawable/ic_favorite_border_24dp" android:state_pressed="true"/>
++    <item android:drawable="@drawable/ic_favorite_24dp" android:state_pressed="false"/>
++
++</selector>
+\ No newline at end of file
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/OnListFragmentInteractionListener.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/OnListFragmentInteractionListener.kt	(date 1537276428820)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/OnListFragmentInteractionListener.kt	(date 1537276428820)
+@@ -0,0 +1,7 @@
++package com.yuricfurusho.yurigiphyapi.fragments
++
++import com.yuricfurusho.yurigiphyapi.model.Data
++
++interface OnListFragmentInteractionListener {
++    fun onAddToFavorite(data: Data)
++}
+\ No newline at end of file
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/FavoritesFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/FavoritesFragment.kt	(date 1537276428818)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/FavoritesFragment.kt	(date 1537276428818)
+@@ -0,0 +1,168 @@
++package com.yuricfurusho.yurigiphyapi.fragments
++
++import android.content.Context
++import android.os.Bundle
++import android.support.v4.app.Fragment
++import android.support.v7.widget.LinearLayoutManager
++import android.support.v7.widget.StaggeredGridLayoutManager
++import android.util.Log
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import com.yuricfurusho.yurigiphyapi.R
++import com.yuricfurusho.yurigiphyapi.model.Data
++import kotlinx.android.synthetic.main.fragment_favorite_gif_list.*
++import org.json.JSONObject
++import retrofit2.Response
++import java.util.*
++
++class FavoritesFragment : Fragment() {
++    private var columnCount = 1
++    var favoriteGifList: MutableList<Data> = arrayListOf()
++    private var listener: OnListFragmentInteractionListener? = null
++
++    override fun onSaveInstanceState(outState: Bundle) {
++        super.onSaveInstanceState(outState)
++
++        outState.putStringArrayList(FAVORITE_GIF_LIST, favoriteGifList as ArrayList<String>?)
++
++    }
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++//        favoriteGifIds.add("xT77XP9O9da9O04fAI")
++
++        arguments?.let {
++            columnCount = it.getInt(ARG_COLUMN_COUNT)
++        }
++    }
++
++    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
++        return inflater.inflate(R.layout.fragment_favorite_gif_list, container, false)
++    }
++
++    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
++        super.onViewCreated(view, savedInstanceState)
++
++        with(recyclerFavoriteGifs) {
++            layoutManager = when {
++                columnCount <= 1 -> LinearLayoutManager(context)
++                else -> StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL)
++            }
++
++            adapter = com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter(favoriteGifList, listener, columnCount != 1)
++        }
++//        swipeFavoriteGifs.setOnRefreshListener { updateFavoriteList() }
++
++        if (savedInstanceState != null) {
++            savedInstanceState.getStringArrayList(FAVORITE_GIF_LIST)
++        }
++//        updateFavoriteList()
++    }
++
++//    fun updateFavoriteList() {
++//        swipeFavoriteGifs.isRefreshing = true
++//
++//        val loggingInterceptor = HttpLoggingInterceptor()
++//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
++//        val client = OkHttpClient.Builder()
++//                .addInterceptor(loggingInterceptor)
++//                .build()
++//
++//
++//        val retrofit = Retrofit.Builder()
++//                .baseUrl("https://api.giphy.com/")
++//                .addConverterFactory(GsonConverterFactory.create())
++//                .client(client)
++//                .build()
++//
++//        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
++//
++//        val listFavoriteGifs: Call<TrendingResponse> = giphyService.listFavoriteGifs(favoriteGifIds.joinToString())
++//
++//        listFavoriteGifs.enqueue(object : Callback<TrendingResponse?> {
++//            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
++//                val responseText = t!!.message
++//                Log.d("GiphyService", responseText)
++//                //                call. // TODO
++//
++//                swipeFavoriteGifs.isRefreshing = false
++//            }
++//
++//            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
++//                val responseText = getRawResponse(response!!)
++//                Log.d("GiphyService", responseText)
++//
++//                if (response != null && response.body() != null) {
++//                    favoriteGifList.clear()
++//                    favoriteGifList.addAll(response?.body()!!.data)
++//                    recyclerFavoriteGifs.adapter.notifyDataSetChanged()
++//                }
++//
++//                swipeFavoriteGifs.isRefreshing = false
++//            }
++//        })
++//
++//
++//    }
++
++    private fun getRawResponse(response: Response<*>): String {
++        var responseText = "RawResponse: \n" + response.toString() + "\n"
++        if (response.isSuccessful) {
++            responseText = responseText + "response.body: " + if (response.body() != null) response.body()!!.toString() else ""
++        } else {
++            responseText = responseText + parseError(response)
++        }
++        return responseText
++    }
++
++    private fun parseError(response: Response<*>): String {
++        try {
++            val jObjError = JSONObject(response.errorBody()!!.string())
++            return "errorBody:\n" + jObjError.toString()
++        } catch (e: Exception) {
++            Log.e(this.javaClass.simpleName, "parseError: " + e.message)
++            return "e.getMessage():\n" + e.message
++        }
++
++    }
++
++    override fun onAttach(context: Context) {
++        super.onAttach(context)
++        if (context is OnListFragmentInteractionListener) {
++            listener = context
++        } else {
++            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
++        }
++    }
++
++    override fun onDetach() {
++        super.onDetach()
++        listener = null
++    }
++
++    fun updateFavoriteList(data: Data) {
++        if (favoriteGifList.contains(data)) {
++            val indexOf = favoriteGifList.indexOf(data)
++            favoriteGifList.remove(data)
++            recyclerFavoriteGifs.adapter.notifyItemRemoved(indexOf)
++        } else {
++            favoriteGifList.add(data)
++            val indexOf = favoriteGifList.indexOf(data)
++//            favoriteGifList.get(indexOf).apply { favorited = !favorited }
++            recyclerFavoriteGifs.adapter.notifyItemInserted(indexOf)
++        }
++    }
++
++    companion object {
++        const val ARG_COLUMN_COUNT = "column-count"
++        const val FAVORITE_GIF_LIST = "favoriteIdList"
++        @JvmStatic
++        fun newInstance(columnCount: Int) =
++                FavoritesFragment().apply {
++                    arguments = Bundle().apply {
++                        putInt(ARG_COLUMN_COUNT, columnCount)
++                    }
++                }
++    }
++}
+Index: app/src/main/res/layout/fragment_gif_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.v7.widget.RecyclerView\n    android:id=\"@+id/recyclerTrendingGifs\"\n    android:name=\"com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment\"\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:layout_marginLeft=\"16dp\"\n    android:layout_marginRight=\"16dp\"\n    app:layoutManager=\"LinearLayoutManager\"\n    tools:context=\".fragments.TrendingFragment\"\n    tools:listitem=\"@layout/adapter_gif\"/>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_gif_list.xml	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/res/layout/fragment_gif_list.xml	(date 1537276428857)
+@@ -1,14 +1,22 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<android.support.v7.widget.RecyclerView
+-    android:id="@+id/recyclerTrendingGifs"
+-    android:name="com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment"
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:layout_marginLeft="16dp"
+-    android:layout_marginRight="16dp"
+-    app:layoutManager="LinearLayoutManager"
+-    tools:context=".fragments.TrendingFragment"
+-    tools:listitem="@layout/adapter_gif"/>
+\ No newline at end of file
++<android.support.v4.widget.SwipeRefreshLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/swipeTrendingGifs"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <android.support.v7.widget.RecyclerView
++        android:id="@+id/recyclerTrendingGifs"
++        android:name="com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_marginLeft="16dp"
++        android:layout_marginRight="16dp"
++        app:layoutManager="LinearLayoutManager"
++        tools:context=".fragments.TrendingFragment"
++        tools:listitem="@layout/adapter_gif"/>
++
++</android.support.v4.widget.SwipeRefreshLayout>
++
+Index: app/src/main/res/layout/adapter_gif.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:orientation=\"horizontal\">\n\n    <ImageView\n        android:id=\"@+id/imageViewGif\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:contentDescription=\"@string/content_description_there_is_giphy_image_here\"\n        android:scaleType=\"fitCenter\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        tools:src=\"@drawable/ic_launcher_background\"/>\n\n    <View\n        android:layout_width=\"0dp\"\n        android:layout_height=\"0dp\"\n        android:background=\"@drawable/shape_shadow_gradient\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        />\n\n    <ImageView\n        android:id=\"@+id/favButton\"\n        android:layout_width=\"32dp\"\n        android:layout_height=\"32dp\"\n        android:contentDescription=\"@string/todo\"\n        android:src=\"@drawable/ic_favorite_24dp\"\n        app:layout_constraintBottom_toBottomOf=\"@id/guidelineBottom\"\n        app:layout_constraintEnd_toEndOf=\"@id/guidelineEnd\"\n        />\n\n    <android.support.constraint.Guideline\n        android:id=\"@+id/guidelineStart\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"vertical\"\n        app:layout_constraintGuide_begin=\"8dp\"/>\n\n    <android.support.constraint.Guideline\n        android:id=\"@+id/guidelineEnd\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"vertical\"\n        app:layout_constraintGuide_end=\"8dp\"/>\n\n    <android.support.constraint.Guideline\n        android:id=\"@+id/guidelineTop\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"horizontal\"\n        app:layout_constraintGuide_begin=\"8dp\"/>\n\n    <android.support.constraint.Guideline\n        android:id=\"@+id/guidelineBottom\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"horizontal\"\n        app:layout_constraintGuide_end=\"8dp\"/>\n\n\n</android.support.constraint.ConstraintLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/adapter_gif.xml	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/res/layout/adapter_gif.xml	(date 1537276428850)
+@@ -5,12 +5,13 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
++    android:background="#000"
+     android:orientation="horizontal">
+ 
+     <ImageView
+         android:id="@+id/imageViewGif"
+         android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
++        android:layout_height="200dp"
+         android:contentDescription="@string/content_description_there_is_giphy_image_here"
+         android:scaleType="fitCenter"
+         app:layout_constraintEnd_toEndOf="parent"
+@@ -33,7 +34,7 @@
+         android:layout_width="32dp"
+         android:layout_height="32dp"
+         android:contentDescription="@string/todo"
+-        android:src="@drawable/ic_favorite_24dp"
++        android:src="@drawable/ic_favorite_border_24dp"
+         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+         />
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <string name=\"app_name\">YuriGiphyAPI</string>\n    <string name=\"section_format\">Hello World from section: %1$d</string>\n    <string name=\"tab_favorites\">Favorites</string>\n    <string name=\"tab_trending\">Trending</string>\n    <string name=\"content_description_there_is_giphy_image_here\">There is GIPHY image here.</string>\n    <string name=\"todo\">TODO</string>\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/res/values/strings.xml	(date 1537276428867)
+@@ -5,4 +5,6 @@
+     <string name="tab_trending">Trending</string>
+     <string name="content_description_there_is_giphy_image_here">There is GIPHY image here.</string>
+     <string name="todo">TODO</string>
++    <string name="search_hint">Search animated gifs</string>
++    <string name="action_search_gif">Search Gif</string>
+ </resources>
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/TrendingFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi.fragments\n\nimport android.content.Context\nimport android.os.Bundle\nimport android.support.v4.app.Fragment\nimport android.support.v7.widget.GridLayoutManager\nimport android.support.v7.widget.LinearLayoutManager\nimport android.util.Log\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport com.yuricfurusho.yurigiphyapi.GiphyService\nimport com.yuricfurusho.yurigiphyapi.R\nimport com.yuricfurusho.yurigiphyapi.adapters.GIFRecyclerViewAdapter\nimport com.yuricfurusho.yurigiphyapi.model.Data\nimport com.yuricfurusho.yurigiphyapi.model.TrendingResponse\nimport kotlinx.android.synthetic.main.fragment_gif_list.*\nimport okhttp3.OkHttpClient\nimport okhttp3.logging.HttpLoggingInterceptor\nimport org.json.JSONObject\nimport retrofit2.Call\nimport retrofit2.Callback\nimport retrofit2.Response\nimport retrofit2.Retrofit\nimport retrofit2.converter.gson.GsonConverterFactory\n\n\nclass TrendingFragment : Fragment() {\n    private var columnCount = 1\n    var gifList: List<Data> = arrayListOf()\n    private var listener: OnListFragmentInteractionListener? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n\n        arguments?.let {\n            columnCount = it.getInt(ARG_COLUMN_COUNT)\n        }\n    }\n\n    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {\n        return inflater.inflate(R.layout.fragment_gif_list, container, false)\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n\n        with(recyclerTrendingGifs) {\n            layoutManager = when {\n                columnCount <= 1 -> LinearLayoutManager(context)\n                else -> GridLayoutManager(context, columnCount)\n            }\n\n            adapter = GIFRecyclerViewAdapter(gifList, listener)\n        }\n\n    }\n\n    override fun onResume() {\n        super.onResume()\n\n\n        // TODO move to another place\n        val loggingInterceptor = HttpLoggingInterceptor()\n        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)\n        val client = OkHttpClient.Builder()\n                .addInterceptor(loggingInterceptor)\n                .build()\n\n\n        val retrofit = Retrofit.Builder()\n                .baseUrl(\"https://api.giphy.com/\")\n                .addConverterFactory(GsonConverterFactory.create())\n                .client(client)\n                .build()\n\n        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)\n\n        val listGifs: Call<TrendingResponse> = giphyService.listGifs(\"20\")\n\n\n\n\n        listGifs.enqueue(object : Callback<TrendingResponse?> {\n            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {\n                val responseText = t!!.message\n                Log.d(\"GiphyService\", responseText)\n//                call. // TODO\n            }\n\n            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {\n                val responseText = getRawResponse(response!!)\n                Log.d(\"GiphyService\", responseText)\n\n                gifList = response?.body()!!.data\n//                recyclerTrendingGifs.adapter.notifyDataSetChanged()\n                recyclerTrendingGifs.adapter = GIFRecyclerViewAdapter(gifList, listener)\n            }\n        })\n    }\n\n    private fun getRawResponse(response: Response<*>): String {\n        var responseText = \"RawResponse: \\n\" + response.toString() + \"\\n\"\n        if (response.isSuccessful) {\n            responseText = responseText + \"response.body: \" + if (response.body() != null) response.body()!!.toString() else \"\"\n        } else {\n            responseText = responseText + parseError(response)\n        }\n        return responseText\n    }\n\n    private fun parseError(response: Response<*>): String {\n        try {\n            val jObjError = JSONObject(response.errorBody()!!.string())\n            return \"errorBody:\\n\" + jObjError.toString()\n        } catch (e: Exception) {\n            Log.e(this.javaClass.simpleName, \"parseError: \" + e.message)\n            return \"e.getMessage():\\n\" + e.message\n        }\n\n    }\n\n    override fun onAttach(context: Context) {\n        super.onAttach(context)\n        if (context is OnListFragmentInteractionListener) {\n            listener = context\n        } else {\n            throw RuntimeException(context.toString() + \" must implement OnListFragmentInteractionListener\")\n        }\n    }\n\n    override fun onDetach() {\n        super.onDetach()\n        listener = null\n    }\n\n    interface OnListFragmentInteractionListener {\n        fun onAddToFavorite(item: Any?)\n    }\n\n    companion object {\n        const val ARG_COLUMN_COUNT = \"column-count\"\n        @JvmStatic\n        fun newInstance(columnCount: Int) =\n                TrendingFragment().apply {\n                    arguments = Bundle().apply {\n                        putInt(ARG_COLUMN_COUNT, columnCount)\n                    }\n                }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/TrendingFragment.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/fragments/TrendingFragment.kt	(date 1537276428824)
+@@ -27,7 +27,7 @@
+ 
+ class TrendingFragment : Fragment() {
+     private var columnCount = 1
+-    var gifList: List<Data> = arrayListOf()
++    var gifList: MutableList<Data> = arrayListOf()
+     private var listener: OnListFragmentInteractionListener? = null
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+@@ -51,16 +51,58 @@
+                 else -> GridLayoutManager(context, columnCount)
+             }
+ 
+-            adapter = GIFRecyclerViewAdapter(gifList, listener)
++            adapter = GIFRecyclerViewAdapter(gifList, listener, columnCount != 1)
+         }
++
++        swipeTrendingGifs.setOnRefreshListener { updateTrendingList() }
++
++    }
++
++    private fun updateTrendingList() {
++        swipeTrendingGifs.isRefreshing = true
++
++        val loggingInterceptor = HttpLoggingInterceptor()
++        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
++        val client = OkHttpClient.Builder()
++                .addInterceptor(loggingInterceptor)
++                .build()
++
++
++        val retrofit = Retrofit.Builder()
++                .baseUrl("https://api.giphy.com/")
++                .addConverterFactory(GsonConverterFactory.create())
++                .client(client)
++                .build()
++
++        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java)
++
++        val listTrendingGifs: Call<TrendingResponse> = giphyService.listTrendingGifs("20")
++
++        listTrendingGifs.enqueue(object : Callback<TrendingResponse?> {
++            override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
++                val responseText = t!!.message
++                Log.d("GiphyService", responseText)
++//                call. // TODO
++
++                swipeTrendingGifs.isRefreshing = false
++            }
+ 
+-    }
++            override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
++                val responseText = getRawResponse(response!!)
++                Log.d("GiphyService", responseText)
++
++                gifList.clear()
++                gifList.addAll(response.body()!!.data)
++                recyclerTrendingGifs.adapter.notifyDataSetChanged()
++                swipeTrendingGifs.isRefreshing = false
++            }
++        })
+ 
+-    override fun onResume() {
+-        super.onResume()
++    }
+ 
++    private fun searchGifOnServer(query: String?) {
++        swipeTrendingGifs.isRefreshing = true
+ 
+-        // TODO move to another place
+         val loggingInterceptor = HttpLoggingInterceptor()
+         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+         val client = OkHttpClient.Builder()
+@@ -74,29 +116,36 @@
+                 .client(client)
+                 .build()
+ 
+-        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java!!)
+-
+-        val listGifs: Call<TrendingResponse> = giphyService.listGifs("20")
++        val giphyService = retrofit.create<GiphyService>(GiphyService::class.java)
+ 
++        val listResultsGifs: Call<TrendingResponse> = giphyService.searchGifs(query)
+ 
+-
+-
+-        listGifs.enqueue(object : Callback<TrendingResponse?> {
++        listResultsGifs.enqueue(object : Callback<TrendingResponse?> {
+             override fun onFailure(call: Call<TrendingResponse?>?, t: Throwable?) {
+                 val responseText = t!!.message
+                 Log.d("GiphyService", responseText)
+ //                call. // TODO
++
++                swipeTrendingGifs.isRefreshing = false
+             }
+ 
+             override fun onResponse(call: Call<TrendingResponse?>?, response: Response<TrendingResponse?>?) {
+                 val responseText = getRawResponse(response!!)
+                 Log.d("GiphyService", responseText)
+ 
+-                gifList = response?.body()!!.data
+-//                recyclerTrendingGifs.adapter.notifyDataSetChanged()
+-                recyclerTrendingGifs.adapter = GIFRecyclerViewAdapter(gifList, listener)
++                gifList.clear()
++                gifList.addAll(response.body()!!.data)
++                recyclerTrendingGifs.adapter.notifyDataSetChanged()
++                swipeTrendingGifs.isRefreshing = false
+             }
+         })
++
++    }
++
++    override fun onResume() {
++        super.onResume()
++
++        updateTrendingList()
+     }
+ 
+     private fun getRawResponse(response: Response<*>): String {
+@@ -134,8 +183,13 @@
+         listener = null
+     }
+ 
+-    interface OnListFragmentInteractionListener {
+-        fun onAddToFavorite(item: Any?)
++    fun updateFavoriteList(data: Data) {
++        val index = gifList.indexOf(data)
++        recyclerTrendingGifs.adapter.notifyItemChanged(index)
++    }
++
++    fun searchGif(query: String?) {
++        searchGifOnServer(query)
+     }
+ 
+     companion object {
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.design.widget.CoordinatorLayout\n    android:id=\"@+id/main_content\"\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:fitsSystemWindows=\"true\"\n    tools:context=\".MainActivity\">\n\n    <android.support.design.widget.AppBarLayout\n        android:id=\"@+id/appbar\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:paddingTop=\"@dimen/appbar_padding_top\"\n        android:theme=\"@style/AppTheme.AppBarOverlay\">\n\n        <android.support.v7.widget.Toolbar\n            android:id=\"@+id/toolbar\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"?attr/actionBarSize\"\n            android:layout_weight=\"1\"\n            android:background=\"?attr/colorPrimary\"\n            app:layout_scrollFlags=\"scroll|enterAlways\"\n            app:popupTheme=\"@style/AppTheme.PopupOverlay\"\n            app:title=\"@string/app_name\">\n\n        </android.support.v7.widget.Toolbar>\n\n        <android.support.design.widget.TabLayout\n            android:id=\"@+id/tabs\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\">\n\n            <android.support.design.widget.TabItem\n                android:id=\"@+id/tabTrending\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:text=\"@string/tab_trending\"/>\n\n            <android.support.design.widget.TabItem\n                android:id=\"@+id/tabFavorites\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:text=\"@string/tab_favorites\"/>\n\n        </android.support.design.widget.TabLayout>\n    </android.support.design.widget.AppBarLayout>\n\n    <android.support.v4.view.ViewPager\n        android:id=\"@+id/container\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        app:layout_behavior=\"@string/appbar_scrolling_view_behavior\"/>\n\n</android.support.design.widget.CoordinatorLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/res/layout/activity_main.xml	(date 1537276428848)
+@@ -7,6 +7,7 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:fitsSystemWindows="true"
++    tools:menu="option_menu"
+     tools:context=".MainActivity">
+ 
+     <android.support.design.widget.AppBarLayout
+@@ -49,7 +50,7 @@
+     </android.support.design.widget.AppBarLayout>
+ 
+     <android.support.v4.view.ViewPager
+-        android:id="@+id/container"
++        android:id="@+id/viewPagerMain"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/model/TrendingResponse.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi.model\n\nimport com.google.gson.annotations.SerializedName\n\n\ndata class TrendingResponse(\n        val data: List<Data>,\n        val pagination: Pagination,\n        val meta: Meta)\n\n\ndata class Data(\n        val type: String,\n        val id: String,\n        val slug: String,\n        val url: String,\n        @SerializedName(\"bitly_gif_url\")\n        val bitlyGifUrl: String,\n        @SerializedName(\"bitly_url\")\n        val bitlyUrl: String,\n        @SerializedName(\"embed_url\")\n        val embedUrl: String,\n        val username: String,\n        val source: String,\n        val rating: String,\n        @SerializedName(\"content_url\")\n        val contentUrl: String,\n        @SerializedName(\"source_tld\")\n        val sourceTld: String,\n        @SerializedName(\"source_post_url\")\n        val sourcePostUrl: String,\n        @SerializedName(\"is_sticker\")\n        val isSticker: Int,\n        @SerializedName(\"import_datetime\")\n        val importDatetime: String,\n        @SerializedName(\"trending_datetime\")\n        val trendingDatetime: String,\n        val user: User,\n        val images: Images,\n        val title: String,\n        @SerializedName(\"_score\")\n        val score: Int\n)\n\ndata class User(\n        @SerializedName(\"avatar_url\")\n        val avatarUrl: String,\n        @SerializedName(\"banner_url\")\n        val bannerUrl: String,\n        @SerializedName(\"banner_image\")\n        val bannerImage: String,\n        @SerializedName(\"profile_url\")\n        val profileUrl: String,\n        val username: String,\n        @SerializedName(\"display_name\")\n        val displayName: String,\n        @SerializedName(\"is_verified\")\n        val isVerified: Boolean\n)\n\ndata class Images(\n        @SerializedName(\"fixed_height_still\")\n        val fixedHeightStill: FixedHeightStill,\n        @SerializedName(\"original_still\")\n        val originalStill: OriginalStill,\n        @SerializedName(\"fixed_width\")\n        val fixedWidth: FixedWidth,\n        @SerializedName(\"fixed_height_small_still\")\n        val fixedHeightSmallStill: FixedHeightSmallStill,\n        @SerializedName(\"fixed_height_downsampled\")\n        val fixedHeightDownsampled: FixedHeightDownsampled,\n        val preview: Preview,\n        @SerializedName(\"fixed_height_small\")\n        val fixedHeightSmall: FixedHeightSmall,\n        @SerializedName(\"downsized_still\")\n        val downsizedStill: DownsizedStill,\n        val downsized: Downsized,\n        @SerializedName(\"downsized_large\")\n        val downsizedLarge: DownsizedLarge,\n        @SerializedName(\"fixed_width_small_still\")\n        val fixedWidthSmallStill: FixedWidthSmallStill,\n        @SerializedName(\"preview_webp\")\n        val previewWebp: PreviewWebp,\n        @SerializedName(\"fixed_width_still\")\n        val fixedWidthStill: FixedWidthStill,\n        @SerializedName(\"fixed_width_small\")\n        val fixedWidthSmall: FixedWidthSmall,\n        @SerializedName(\"downsized_small\")\n        val downsizedSmall: DownsizedSmall,\n        @SerializedName(\"fixed_width_downsampled\")\n        val fixedWidthDownsampled: FixedWidthDownsampled,\n        @SerializedName(\"downsized_medium\")\n        val downsizedMedium: DownsizedMedium,\n        val original: Original,\n        @SerializedName(\"fixed_height\")\n        val fixedHeight: FixedHeight,\n        val hd: Hd,\n        val looping: Looping,\n        @SerializedName(\"original_mp4\")\n        val originalMp4: OriginalMp4,\n        @SerializedName(\"preview_gif\")\n        val previewGif: PreviewGif,\n        @SerializedName(\"480w_still\")\n        val wStill: WStill\n)\n\ndata class WStill(\n        val url: String,\n        val width: String,\n        val height: String\n)\n\ndata class OriginalStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class DownsizedLarge(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class Preview(\n        val width: String,\n        val height: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String\n)\n\ndata class FixedWidthStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class DownsizedMedium(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class Looping(\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String\n)\n\ndata class FixedHeightStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class Original(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val frames: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String,\n        val hash: String\n)\n\ndata class OriginalMp4(\n        val width: String,\n        val height: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String\n)\n\ndata class Downsized(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class PreviewGif(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class FixedHeightDownsampled(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class FixedHeightSmall(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class DownsizedStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class FixedHeightSmallStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class Hd(\n        val width: String,\n        val height: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String\n)\n\ndata class DownsizedSmall(\n        val width: String,\n        val height: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String\n)\n\ndata class FixedWidthDownsampled(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class PreviewWebp(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class FixedWidth(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class FixedHeight(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class FixedWidthSmall(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String,\n        val mp4: String,\n        @SerializedName(\"mp4_size\")\n        val mp4Size: String,\n        val webp: String,\n        @SerializedName(\"webp_size\")\n        val webpSize: String\n)\n\ndata class FixedWidthSmallStill(\n        val url: String,\n        val width: String,\n        val height: String,\n        val size: String\n)\n\ndata class Pagination(\n        @SerializedName(\"total_count\")\n        val totalCount: Int,\n        val count: Int,\n        val offset: Int\n)\n\ndata class Meta(\n        val status: Int,\n        val msg: String,\n        @SerializedName(\"response_id\")\n        val responseId: String\n)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/model/TrendingResponse.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/model/TrendingResponse.kt	(date 1537276428829)
+@@ -1,15 +1,17 @@
+ package com.yuricfurusho.yurigiphyapi.model
+ 
+ import com.google.gson.annotations.SerializedName
++import java.io.Serializable
+ 
+ 
+-data class TrendingResponse(
++data class TrendingResponse (
+         val data: List<Data>,
+         val pagination: Pagination,
+-        val meta: Meta)
++        val meta: Meta) : Serializable
+ 
+ 
+ data class Data(
++        var favorited: Boolean,
+         val type: String,
+         val id: String,
+         val slug: String,
+@@ -39,8 +41,8 @@
+         val images: Images,
+         val title: String,
+         @SerializedName("_score")
+-        val score: Int
+-)
++        val score: Any
++) : Serializable
+ 
+ data class User(
+         @SerializedName("avatar_url")
+@@ -56,7 +58,7 @@
+         val displayName: String,
+         @SerializedName("is_verified")
+         val isVerified: Boolean
+-)
++) : Serializable
+ 
+ data class Images(
+         @SerializedName("fixed_height_still")
+@@ -102,27 +104,27 @@
+         val previewGif: PreviewGif,
+         @SerializedName("480w_still")
+         val wStill: WStill
+-)
++) : Serializable
+ 
+ data class WStill(
+         val url: String,
+         val width: String,
+         val height: String
+-)
++) : Serializable
+ 
+ data class OriginalStill(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class DownsizedLarge(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class Preview(
+         val width: String,
+@@ -130,7 +132,7 @@
+         val mp4: String,
+         @SerializedName("mp4_size")
+         val mp4Size: String
+-)
++) : Serializable
+ 
+ data class FixedWidthStill(
+         val url: String,
+@@ -144,20 +146,20 @@
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class Looping(
+         val mp4: String,
+         @SerializedName("mp4_size")
+         val mp4Size: String
+-)
++) : Serializable
+ 
+ data class FixedHeightStill(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class Original(
+         val url: String,
+@@ -172,7 +174,7 @@
+         @SerializedName("webp_size")
+         val webpSize: String,
+         val hash: String
+-)
++) : Serializable
+ 
+ data class OriginalMp4(
+         val width: String,
+@@ -187,14 +189,14 @@
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class PreviewGif(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class FixedHeightDownsampled(
+         val url: String,
+@@ -204,7 +206,7 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class FixedHeightSmall(
+         val url: String,
+@@ -217,21 +219,21 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class DownsizedStill(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class FixedHeightSmallStill(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class Hd(
+         val width: String,
+@@ -239,7 +241,7 @@
+         val mp4: String,
+         @SerializedName("mp4_size")
+         val mp4Size: String
+-)
++) : Serializable
+ 
+ data class DownsizedSmall(
+         val width: String,
+@@ -247,7 +249,7 @@
+         val mp4: String,
+         @SerializedName("mp4_size")
+         val mp4Size: String
+-)
++) : Serializable
+ 
+ data class FixedWidthDownsampled(
+         val url: String,
+@@ -257,14 +259,14 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class PreviewWebp(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class FixedWidth(
+         val url: String,
+@@ -277,7 +279,7 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class FixedHeight(
+         val url: String,
+@@ -290,7 +292,7 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class FixedWidthSmall(
+         val url: String,
+@@ -303,25 +305,25 @@
+         val webp: String,
+         @SerializedName("webp_size")
+         val webpSize: String
+-)
++) : Serializable
+ 
+ data class FixedWidthSmallStill(
+         val url: String,
+         val width: String,
+         val height: String,
+         val size: String
+-)
++) : Serializable
+ 
+ data class Pagination(
+         @SerializedName("total_count")
+         val totalCount: Int,
+         val count: Int,
+         val offset: Int
+-)
++) : Serializable
+ 
+ data class Meta(
+         val status: Int,
+         val msg: String,
+         @SerializedName("response_id")
+         val responseId: String
+-)
++) : Serializable
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi\n\nimport android.os.Bundle\nimport android.support.design.widget.TabLayout\nimport android.support.v7.app.AppCompatActivity\nimport com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter\nimport com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment\nimport kotlinx.android.synthetic.main.activity_main.*\n\nclass MainActivity : AppCompatActivity(), TrendingFragment.OnListFragmentInteractionListener {\n    override fun onAddToFavorite(item: Any?) {\n        TODO(\"not implemented\") //To change body of created functions use File | Settings | File Templates.\n    }\n\n    private var giphyPagerAdapter: GiphyPagerAdapter? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n\n        setSupportActionBar(toolbar)\n        giphyPagerAdapter = GiphyPagerAdapter(supportFragmentManager)\n        container.adapter = giphyPagerAdapter\n\n        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))\n        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/MainActivity.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/MainActivity.kt	(date 1537276428807)
+@@ -1,15 +1,29 @@
+ package com.yuricfurusho.yurigiphyapi
+ 
++import android.app.SearchManager
++import android.content.Context
++import android.content.Intent
+ import android.os.Bundle
+ import android.support.design.widget.TabLayout
+ import android.support.v7.app.AppCompatActivity
++import android.support.v7.widget.SearchView
++import android.view.Menu
+ import com.yuricfurusho.yurigiphyapi.adapters.GiphyPagerAdapter
++import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
++import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
+ import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment
++import com.yuricfurusho.yurigiphyapi.model.Data
+ import kotlinx.android.synthetic.main.activity_main.*
+ 
+-class MainActivity : AppCompatActivity(), TrendingFragment.OnListFragmentInteractionListener {
+-    override fun onAddToFavorite(item: Any?) {
+-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
++class MainActivity : AppCompatActivity(), OnListFragmentInteractionListener {
++    override fun onAddToFavorite(data: Data) {
++
++        val trendingFrag: TrendingFragment = supportFragmentManager
++                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_TRENDING_VIEWPAGER_POSITION) as TrendingFragment
++        val favoritesFrag: FavoritesFragment = supportFragmentManager
++                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_FAVORITES_VIEWPAGER_POSITION) as FavoritesFragment
++        trendingFrag.updateFavoriteList(data)
++        favoritesFrag.updateFavoriteList(data)
+     }
+ 
+     private var giphyPagerAdapter: GiphyPagerAdapter? = null
+@@ -20,10 +34,45 @@
+ 
+         setSupportActionBar(toolbar)
+         giphyPagerAdapter = GiphyPagerAdapter(supportFragmentManager)
+-        container.adapter = giphyPagerAdapter
++        viewPagerMain.adapter = giphyPagerAdapter
++
++        viewPagerMain.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
++        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPagerMain))
++
++        // Get the intent, verify the action and get the query
++        if (Intent.ACTION_SEARCH == intent.action) {
++            val query = intent.getStringExtra(SearchManager.QUERY)
++            doMySearch(query)
++        }
++    }
++
++    override fun onNewIntent(intent: Intent?) {
++        super.onNewIntent(intent)
++        // Get the intent, verify the action and get the query
++        if (intent != null) {
++            if (Intent.ACTION_SEARCH == intent.action) {
++                val query = intent.getStringExtra(SearchManager.QUERY)
++                doMySearch(query)
++            }
++        }
++    }
+ 
+-        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+-        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
++    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
++        menuInflater.inflate(R.menu.options_menu, menu)
++
++        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
++        val searchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
++
++        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
++        searchView.setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
++
++        return true
++    }
++
++    private fun doMySearch(query: String?) {
++        val trendingFrag: TrendingFragment = supportFragmentManager
++                .findFragmentByTag("android:switcher:" + R.id.viewPagerMain + ":" + GiphyPagerAdapter.TAB_TRENDING_VIEWPAGER_POSITION) as TrendingFragment
++        trendingFrag.searchGif(query)
+     }
+ 
+ }
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GiphyPagerAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi.adapters\n\nimport android.support.v4.app.Fragment\nimport android.support.v4.app.FragmentManager\nimport android.support.v4.app.FragmentPagerAdapter\nimport com.yuricfurusho.yurigiphyapi.fragments.PlaceholderFragment\nimport com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment\n\n/**\n * Created by Yuri Furusho on 10/09/18.\n */\n\nclass GiphyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {\n\n    override fun getItem(position: Int): Fragment {\n        return when (position) {\n            0 -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_TRENDING)\n            1 -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_FAVORITES)\n            else -> PlaceholderFragment.newInstance(position + 1)\n        }\n    }\n\n    override fun getCount(): Int {\n        return 2\n    }\n\n    companion object {\n        const val NUMBER_OF_COLUMNS_TAB_TRENDING = 1\n        const val NUMBER_OF_COLUMNS_TAB_FAVORITES = 2\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GiphyPagerAdapter.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GiphyPagerAdapter.kt	(date 1537276428815)
+@@ -3,6 +3,7 @@
+ import android.support.v4.app.Fragment
+ import android.support.v4.app.FragmentManager
+ import android.support.v4.app.FragmentPagerAdapter
++import com.yuricfurusho.yurigiphyapi.fragments.FavoritesFragment
+ import com.yuricfurusho.yurigiphyapi.fragments.PlaceholderFragment
+ import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment
+ 
+@@ -14,8 +15,8 @@
+ 
+     override fun getItem(position: Int): Fragment {
+         return when (position) {
+-            0 -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_TRENDING)
+-            1 -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_FAVORITES)
++            TAB_TRENDING_VIEWPAGER_POSITION -> TrendingFragment.newInstance(NUMBER_OF_COLUMNS_TAB_TRENDING)
++            TAB_FAVORITES_VIEWPAGER_POSITION -> FavoritesFragment.newInstance(NUMBER_OF_COLUMNS_TAB_FAVORITES)
+             else -> PlaceholderFragment.newInstance(position + 1)
+         }
+     }
+@@ -27,5 +28,7 @@
+     companion object {
+         const val NUMBER_OF_COLUMNS_TAB_TRENDING = 1
+         const val NUMBER_OF_COLUMNS_TAB_FAVORITES = 2
++        const val TAB_TRENDING_VIEWPAGER_POSITION = 0
++        const val TAB_FAVORITES_VIEWPAGER_POSITION = 1
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GIFRecyclerViewAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi.adapters\n\n\nimport android.support.v7.widget.RecyclerView\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.ImageView\nimport com.bumptech.glide.Glide\nimport com.yuricfurusho.yurigiphyapi.R\nimport com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment.OnListFragmentInteractionListener\nimport com.yuricfurusho.yurigiphyapi.model.Data\n\nclass GIFRecyclerViewAdapter(\n        private val mGifObjectList: List<Data>,\n        private val mListener: OnListFragmentInteractionListener?)\n    : RecyclerView.Adapter<GIFRecyclerViewAdapter.ViewHolder>() {\n\n    private val mOnClickListener: View.OnClickListener\n\n    init {\n        mOnClickListener = View.OnClickListener { v ->\n            mListener?.onAddToFavorite(v)\n        }\n    }\n\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {\n        val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_gif, parent, false)\n        return ViewHolder(view)\n    }\n\n    override fun onBindViewHolder(holder: ViewHolder, position: Int) {\n        val item: Data = mGifObjectList[position]\n\n        Glide.with(holder.itemView).load(item.images.fixedHeightDownsampled.url).into(holder.imageViewGif)\n\n        with(holder.imageViewGif) {\n            setOnClickListener(mOnClickListener)\n        }\n    }\n\n    override fun getItemCount(): Int = mGifObjectList.size\n\n    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {\n        val imageViewGif: ImageView = mView.findViewById(R.id.imageViewGif)\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GIFRecyclerViewAdapter.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/adapters/GIFRecyclerViewAdapter.kt	(date 1537276428812)
+@@ -8,40 +8,55 @@
+ import android.widget.ImageView
+ import com.bumptech.glide.Glide
+ import com.yuricfurusho.yurigiphyapi.R
+-import com.yuricfurusho.yurigiphyapi.fragments.TrendingFragment.OnListFragmentInteractionListener
++import com.yuricfurusho.yurigiphyapi.fragments.OnListFragmentInteractionListener
+ import com.yuricfurusho.yurigiphyapi.model.Data
+ 
+ class GIFRecyclerViewAdapter(
+-        private val mGifObjectList: List<Data>,
+-        private val mListener: OnListFragmentInteractionListener?)
++        private val mGifObjectList: MutableList<Data>,
++        private val mListener: OnListFragmentInteractionListener?,
++        private val isGrid: Boolean)
+     : RecyclerView.Adapter<GIFRecyclerViewAdapter.ViewHolder>() {
+ 
+-    private val mOnClickListener: View.OnClickListener
+-
+-    init {
+-        mOnClickListener = View.OnClickListener { v ->
+-            mListener?.onAddToFavorite(v)
+-        }
++    override fun getItemViewType(position: Int): Int {
++        return if (isGrid ) R.layout.adapter_gif_favorite else R.layout.adapter_gif
+     }
+ 
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+-        val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_gif, parent, false)
++        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
++
+         return ViewHolder(view)
+     }
+ 
+     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+-        val item: Data = mGifObjectList[position]
++        val data: Data = mGifObjectList[position]
++        if (data.favorited) {
++            holder.favButton.setImageResource(R.drawable.ic_favorite_selector_checked)
++        } else {
++            holder.favButton.setImageResource(R.drawable.ic_favorite_selector_unchecked)
++        }
+ 
+-        Glide.with(holder.itemView).load(item.images.fixedHeightDownsampled.url).into(holder.imageViewGif)
+ 
+-        with(holder.imageViewGif) {
+-            setOnClickListener(mOnClickListener)
++        Glide.with(holder.itemView)
++                .load(data.images.fixedHeightDownsampled.url)
++                .into(holder.imageViewGif)
++
++        with(holder.favButton) {
++            setOnClickListener {
++                data.apply { favorited = !favorited }
++                mListener?.onAddToFavorite(data)
++            }
+         }
+     }
+ 
+     override fun getItemCount(): Int = mGifObjectList.size
+ 
++    override fun onViewRecycled(holder: ViewHolder) {
++        super.onViewRecycled(holder)
++        holder.imageViewGif.layout(0, 0, 0, 0)
++    }
++
+     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
++        val favButton: ImageView = mView.findViewById(R.id.favButton)
+         val imageViewGif: ImageView = mView.findViewById(R.id.imageViewGif)
+     }
+ }
+Index: app/src/main/res/xml/searchable.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/xml/searchable.xml	(date 1537276428871)
++++ app/src/main/res/xml/searchable.xml	(date 1537276428871)
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<searchable xmlns:android="http://schemas.android.com/apk/res/android"
++            android:label="@string/app_name"
++            android:hint="@string/search_hint" >
++</searchable>
+\ No newline at end of file
+Index: app/src/main/java/com/yuricfurusho/yurigiphyapi/GiphyService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.yuricfurusho.yurigiphyapi\n\nimport com.yuricfurusho.yurigiphyapi.model.TrendingResponse\nimport retrofit2.Call\nimport retrofit2.http.GET\nimport retrofit2.http.Query\n\n\n/**\n * Created by Yuri Furusho on 11/09/18.\n */\ninterface GiphyService {\n//    companion object {\n//        val API_KEY = \"2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2\"\n//    }\n\n    //    @GET(\"v1/gifs/trending?api_key=\" + API_KEY) TODO\n    @GET(\"v1/gifs/trending?api_key=2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2\")\n    fun listGifs(@Query(\"limit\") limit: String): Call<TrendingResponse>\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/yuricfurusho/yurigiphyapi/GiphyService.kt	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/java/com/yuricfurusho/yurigiphyapi/GiphyService.kt	(date 1537276428803)
+@@ -16,5 +16,13 @@
+ 
+     //    @GET("v1/gifs/trending?api_key=" + API_KEY) TODO
+     @GET("v1/gifs/trending?api_key=2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2")
+-    fun listGifs(@Query("limit") limit: String): Call<TrendingResponse>
++    fun listTrendingGifs(@Query("limit") limit: String): Call<TrendingResponse>
++
++    //    @GET("v1/gifs/trending?api_key=" + API_KEY) TODO
++    @GET("v1/gifs/search?api_key=2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2")
++    fun searchGifs(@Query("q") q: String?): Call<TrendingResponse>
++
++    //    @GET("v1/gifs/trending?api_key=" + API_KEY) TODO
++    @GET("/v1/gifs?api_key=2DTSEy6urPd1dJIa6dh3yFuC2u9Yo3B2")
++    fun listFavoriteGifs(@Query("ids") ids: String): Call<TrendingResponse>
+ }
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest package=\"com.yuricfurusho.yurigiphyapi\"\n          xmlns:android=\"http://schemas.android.com/apk/res/android\">\n\n    <uses-permission android:name=\"android.permission.INTERNET\"/>\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/AppTheme\">\n        <activity\n            android:name=\".MainActivity\"\n            android:label=\"@string/app_name\"\n            android:theme=\"@style/AppTheme.NoActionBar\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\"/>\n\n                <category android:name=\"android.intent.category.LAUNCHER\"/>\n            </intent-filter>\n        </activity>\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 3264921fe57dd57e8637f23283d47b9bf5ac270f)
++++ app/src/main/AndroidManifest.xml	(date 1537276428795)
+@@ -15,12 +15,20 @@
+         <activity
+             android:name=".MainActivity"
+             android:label="@string/app_name"
++            android:launchMode="singleTop"
+             android:theme="@style/AppTheme.NoActionBar">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN"/>
+ 
+                 <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>
++            <intent-filter>
++                <action android:name="android.intent.action.SEARCH"/>
++            </intent-filter>
++
++            <meta-data
++                android:name="android.app.searchable"
++                android:resource="@xml/searchable"/>
+         </activity>
+     </application>
+ 

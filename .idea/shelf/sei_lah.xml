@@ -1,0 +1,14 @@
+<changelist name="sei_lah" date="1537983080991" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/sei_lah/shelved.patch" />
+  <option name="DESCRIPTION" value="sei lah" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable/poweredby_640_px_black_vert_text.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/sei_lah/poweredby_640_px_black_vert_text.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/caches/build_file_checksums.ser" />
+    <option name="AFTER_PATH" value=".idea/caches/build_file_checksums.ser" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/sei_lah/build_file_checksums.ser" />
+  </binary>
+</changelist>
